@@ -1,0 +1,27 @@
+.n000trals--dark {
+  --phork-accent-color: #faf8e6;
+  --phork-accent-color-contrast: #434542;
+  --phork-accent-color-L10: #ffffff;
+  --phork-accent-color-D10: #ebe4d1;
+  --phork-accent-color-L20: #ffffff;
+  --phork-accent-color-D20: #dacdba;
+  --phork-accent-color-L30: #ffffff;
+  --phork-accent-color-D30: #b9b2a0;
+  --phork-accent-color-shade: #fffefd;
+  --phork-accent-color-O5: rgba(250, 248, 230, 0.05);
+  --phork-contrast-color: #faf8e6;
+}
+
+.n000trals--light {
+  --phork-accent-color: #82858c;
+  --phork-accent-color-contrast: #f0f0f0;
+  --phork-accent-color-L10: #a5a7ac;
+  --phork-accent-color-D10: #71747b;
+  --phork-accent-color-L20: #c8cacd;
+  --phork-accent-color-D20: #616469;
+  --phork-accent-color-L30: #ebeced;
+  --phork-accent-color-D30: #515358;
+  --phork-accent-color-shade: #f6f6f6;
+  --phork-accent-color-O5: rgba(130, 133, 140, 0.05);
+  --phork-contrast-color: #82858c;
+}

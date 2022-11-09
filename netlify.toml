@@ -1,0 +1,22 @@
+[build]
+base = "./"
+publish = "build/"
+command = "yarn build"
+
+[context.production.environment]
+PUBLIC_URL = "https://n00trals.xyz"
+
+[context.development.environment]
+NODE_ENV = "development"
+PUBLIC_URL = "https://development.n00trals.xyz"
+
+[dev]
+framework = "#custom"
+command = "yarn start-express-dev"
+targetPort = 3_000
+port = 8_443
+
+[[redirects]]
+from = "/*"
+to = "/"
+status = 200
