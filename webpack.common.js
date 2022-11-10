@@ -8,11 +8,11 @@ const path = require('path');
 const webpack = require('webpack');
 const globals = require('./webpack.config');
 const pkg = require('./package.json');
+const clubConfig = require('./config.json');
 
 const { webpackConfig, name, description, version } = pkg;
 const { publicPath } = webpackConfig;
 
-const CLUB_NAME = process.env.NAME;
 const isDev = process.env.NODE_ENV === 'development';
 
 const src = path.resolve(__dirname, 'src');
@@ -171,10 +171,6 @@ const configuration = {
           to: path.join(build, 'static', 'favicon'),
         },
         {
-          from: path.join(assets, 'scripts'),
-          to: path.join(build, 'static', 'scripts'),
-        },
-        {
           from: path.resolve(__dirname, 'src', 'public'),
           to: build,
         },
@@ -187,7 +183,7 @@ const configuration = {
           <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <meta name="Description" content="${pkg.description}" />
+            <meta name="Description" content="${clubConfig.club.description}" />
             <base href="${publicPath}"/>
             <link rel="manifest" href="${publicPath}asset-manifest.json" />
             <link rel="apple-touch-icon" sizes="180x180" href="${publicPath}static/favicon/apple-touch-icon.png">
@@ -195,7 +191,7 @@ const configuration = {
             <link rel="icon" type="image/png" sizes="16x16" href="${publicPath}static/favicon/favicon-16x16.png">
             <link rel="manifest" href="${publicPath}static/favicon/site.webmanifest">
             <link rel="shortcut icon" href="${publicPath}static/favicon/favicon.ico">
-            <title>${CLUB_NAME}</title>
+            <title>${clubConfig.club.name}</title>
           </head>
           <body>
             <div id="root"></div>

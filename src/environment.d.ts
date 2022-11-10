@@ -5,6 +5,7 @@ declare global {
       __VERSION__: string;
       __BASE__: string;
       __NAME__: string;
+      __COLORS__: string;
     }
   }
 }

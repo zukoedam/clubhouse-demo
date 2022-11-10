@@ -4,19 +4,45 @@ This is the source of [https://n00trals.xyz](https://n00trals.xyz).
 
 ### Adapting for other clubs
 
-This was built to work mostly out of the box with Netlify. Otherwise you'll need familiarity with building Javascript packages. Everything is provided as-is with no support.
+This was built to work mostly out of the box with Netlify. Otherwise you'll need familiarity with building Javascript packages. We also recommend picking up a cheap domain at [Namecheap](https://www.namecheap.com/).
 
-- Update [package.json](./package.json) with the club description.
-- Update [config.json](./config.json) with the club name, colors and traits.
-- Update [netlify.toml](./netlify.toml) with the preview URL and the public URL if you plan on using Netlify.
-- Update [./src/assets/json/members.json](./src/assets/json/members.json) with the member list
-- Update [src/assets/favicon/site.webmanifest](./src/assets/favicon/site.webmanifest) with the club name.
+1. Choose "Fork > Create a new fork" from the button in the top right.
+2. In your forked repository make the following changes:
+   - Copy [example.config.json](./example.config.json) to `config.json` and update it with your club's details and traits.
+   - Commit these changes to your repository's main branch
+
+#### If you're using Netlify
+
+1. Create a new [Netlify](https://www.netlify.com/) site and import an existing project.
+2. Connect to Github.
+3. Choose your forked repository.
+4. Update the settings as necessary.
+   - Branch to deploy: main
+   - Build command: yarn build
+   - Publish directory: build
+5. Click "Deploy site" **NOTE THAT THIS WILL FAIL**
+6. Go back to your Netlify site overview
+7. Click "Site settings"
+8. Change site name (note that this name will be used for all your Netlify URLs in the following steps).
+9. In the left navigation choose "Environment variables".
+10. Click "Add a variable".
+11. Click "Show advanced" and add the following environmental variable
+   - Key: `PUBLIC_URL`
+   - Scopes: All scopes
+   - Values: Different value for each deploy context
+     - Production: the URL of your club (eg. https://n00trals.xyz or https://n00trals.netlify.app/)
+     - Local development: `http://localhost:8443`
+     - Add a branch value
+       - Branch name: `development`
+       - Value for branch development: the development URL of your club (eg. https://development--n00trals.netlify.app/)
+12. Go to the Deploys tab in the top navigation.
+13. Click "Trigger deploy" > "Deploy site".
+
 
 #### Without Netlify
 
-* Create `.env` and `.env.development` files based on [.env.sample](./.env.sample).
+* Create `.env` and `.env.development` files based on [example.env](./example.env).
 * Run `yarn install` to install all the dependencies.
-* Run `yarn build` to build the production app.
-* Run `yarn start-express-dev` to run the development app.
-
-A script has been provided to update the member list via `yarn scrape`. If anyone has a better script that can get the data directly from the Blockchain, please reach out on Twitter to [n00trals](https://twitter.com/n00trals).
+* Run `yarn generate-members` to generate your member list based on the traits.
+* Run `yarn build` to build the production app to `./build`.
+* Run `yarn start-express-dev` to run the development app on [http://localhost:8443/](http://localhost:8443/).
