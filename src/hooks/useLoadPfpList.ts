@@ -2,8 +2,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { PfpRecord } from 'types/records';
 
 type PfpDataResponse = Array<{
+  background: string;
   image: string;
-  mint: string;
+  mintAddress?: string;
   name: string;
 }>;
 
@@ -24,7 +25,15 @@ export const useLoadPfpList = (): UseLoadPfpListResponse => {
     fetch('/static/json/members.json')
       .then(response => response.json())
       .then((response: PfpDataResponse) => {
-        setCards(response.map(({ image, mint, name }) => ({ id: mint, image, name })));
+        setCards(
+          response.map(({ background, image, mintAddress, name }) => ({
+            id: name,
+            image,
+            name,
+            mintAddress,
+            background,
+          })),
+        );
       })
       .catch(() => setError('The y00ts are missing. Please come back later.'))
       .finally(() => setLoading(false));

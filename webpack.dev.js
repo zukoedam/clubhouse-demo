@@ -15,7 +15,7 @@ const { webpackConfig } = PACKAGE;
 const { publicPath } = webpackConfig;
 
 if (!process.env.PUBLIC_URL) {
-  throw new Error(`❌ Missing ${env} file. See .env.sample for an example.`);
+  throw new Error(`❌ Missing ${env} file. See example.env for an example.`);
 }
 
 module.exports = merge(common, {
