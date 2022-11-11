@@ -40,16 +40,20 @@ function VirtualizedGridItemBase<RecordType extends BaseGridRecordType>({
     top: `${extractLeftTop(style?.top) + topShift}px`,
   };
 
+  const record = data[index];
+
   // don't show the scrolling notification for the first couple rows
   if (hasPlaceholder && isScrolling && rowIndex > 2) {
     return (
       <GridItem mx={mx} my={my} style={shiftedStyle}>
-        <GridPlaceholderContent columnIndex={columnIndex} record={{ id: `placeholder-${index}` }} rowIndex={rowIndex} />
+        <GridPlaceholderContent
+          columnIndex={columnIndex}
+          record={record || { id: `placeholder-${index}` }}
+          rowIndex={rowIndex}
+        />
       </GridItem>
     );
   }
-
-  const record = data[index];
 
   return record && component ? (
     <GridItem key={record.id} mx={mx} my={my} style={shiftedStyle}>
