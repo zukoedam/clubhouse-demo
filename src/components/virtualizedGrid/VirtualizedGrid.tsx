@@ -1,23 +1,30 @@
+import { css, cx } from '@emotion/css';
 import { useCallback, useMemo } from 'react';
 import * as React from 'react';
 import { FixedSizeGrid, FixedSizeGrid as Grid, FixedSizeGridProps as GridProps } from 'react-window';
 import { useThemeId, useGetSize } from '@phork/phorkit';
 import styles from '@phork/phorkit/styles/modules/common/Scrollbar.module.css';
-import { GRID_CARD_HEIGHT, GRID_CARD_WIDTH, GRID_MX, GRID_MY, MAX_GRID_COLUMNS } from 'config/sizes';
+import { GRID_CARD_HEIGHT, GRID_CARD_WIDTH, GRID_MX, GRID_MY, MAX_GRID_COLUMNS, MIN_GRID_WIDTH } from 'config/sizes';
 import { useGridAxisCounts } from 'hooks/useGridAxisCounts';
 import { getPaperTopOffset } from 'utils/size';
 import { VirtualizedGridItem } from './VirtualizedGridItem';
 import { BaseGridRecordType, GridContextValue, GridProvider } from './context';
 
+const hideHorizontalOverflow = css`
+  overflow-x: hidden !important;
+`;
+
 export type VirtualizedGridProps<RecordType extends BaseGridRecordType> = Pick<
   GridContextValue<RecordType>,
   'cardHeight' | 'cardWidth' | 'component' | 'mx' | 'my' | 'placeholder' | 'raised'
 > & {
+  allowHorizontalOverflow?: boolean;
   finished?: boolean;
   height?: number;
   horizontalSpacing?: number;
   infinite?: boolean;
   maxColumns?: number;
+  minWidth?: number;
   onItemsRendered?: GridProps['onItemsRendered'];
   onScroll?: GridProps['onScroll'];
   records: RecordType[];
@@ -26,6 +33,7 @@ export type VirtualizedGridProps<RecordType extends BaseGridRecordType> = Pick<
 
 function VirtualizedGridBase<RecordType extends BaseGridRecordType>(
   {
+    allowHorizontalOverflow,
     cardHeight = GRID_CARD_HEIGHT,
     cardWidth = GRID_CARD_WIDTH,
     component,
@@ -33,6 +41,7 @@ function VirtualizedGridBase<RecordType extends BaseGridRecordType>(
     height,
     infinite,
     maxColumns = MAX_GRID_COLUMNS,
+    minWidth = MIN_GRID_WIDTH,
     mx = GRID_MX,
     my = GRID_MY,
     onItemsRendered,
@@ -52,12 +61,13 @@ function VirtualizedGridBase<RecordType extends BaseGridRecordType>(
     containerWidth: containerWidth || width || 0,
     itemCount: records.length,
     maxColumns,
+    minWidth,
   });
 
   /**
    * If the last row of items isn't a full row and the records haven't
    * finished loading then clip the records so that it ends on a
-   * full row. This happens when temporal records have been fetched.
+   * full row.
    */
   const clippedRecords =
     infinite && !finished && records.length % columnCount
@@ -91,7 +101,12 @@ function VirtualizedGridBase<RecordType extends BaseGridRecordType>(
       >
         <Grid<RecordType[]>
           useIsScrolling
-          className={[styles.scrollbar, styles['scrollbar--primary'], styles[`scrollbar--${themeId}`]].join(' ')}
+          className={cx(
+            styles.scrollbar,
+            styles['scrollbar--primary'],
+            styles[`scrollbar--${themeId}`],
+            allowHorizontalOverflow || hideHorizontalOverflow,
+          )}
           columnCount={columnCount}
           columnWidth={columnWidth}
           height={height || gridHeight || 0}
@@ -109,6 +124,7 @@ function VirtualizedGridBase<RecordType extends BaseGridRecordType>(
       </GridProvider>
     ),
     [
+      allowHorizontalOverflow,
       cardHeight,
       cardWidth,
       clippedRecords,

@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { Card, CardProps, Theme, withTheme } from '@phork/phorkit';
-import { MIN_GRID_WIDTH } from 'config/sizes';
 import { themes } from 'config/themes';
 
 export type BaseCardProps = CardProps & {
@@ -42,9 +41,5 @@ export const BaseCard = withTheme(styled(Card, {
         z-index: 1;
       }
     `}
-  }
-
-  @media (max-width: ${MIN_GRID_WIDTH - 0.5}px) {
-    width: 100%;
   }
 `);

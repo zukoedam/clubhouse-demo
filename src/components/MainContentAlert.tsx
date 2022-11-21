@@ -25,17 +25,17 @@ const getColorKey = (color: MainContentAlertProps['color']): PaperProps['color']
 
 const StyledLink = styled.a<{ color: PaperProps['color']; themeId: Theme }>`
   ${({ color, themeId }) => `
-  border-radius: 100%;
-  display: block;
-  position: relative;
+    border-radius: 100%;
+    display: block;
+    position: relative;
 
-  --focus-ring-color: ${
-    color === 'accent' ? 'var(--phork-accent-color)' : themes[themeId][`color-${color}` as keyof ThemeColors]
-  };
-  --focus-ring-size: 16px;
+    --focus-ring-color: ${
+      color === 'accent' ? 'var(--phork-accent-color)' : themes[themeId][`color-${color}` as keyof ThemeColors]
+    };
+    --focus-ring-size: 16px;
 
-  &:active {
-    --focus-ring-opacity: 0.4;
+    &:active {
+      --focus-ring-opacity: 0.4;
   `}
 `;
 
@@ -43,14 +43,14 @@ const AlertContainer = styled(Paper, {
   shouldForwardProp: (prop: string) => !['size'].includes(prop),
 })<{ size: number }>`
   ${({ size }) => `
-  align-items: center;
-  border-radius: 100%;
-  display: flex;
-  flex-direction: column;
-  height: ${size}px;
-  justify-content: center;
-  width: ${size}px;
-`}
+    align-items: center;
+    border-radius: 100%;
+    display: flex;
+    flex-direction: column;
+    height: ${size}px;
+    justify-content: center;
+    width: ${size}px;
+  `}
 `;
 
 export type MainContentAlertProps = Omit<PaperProps, 'children' | 'color'> & {

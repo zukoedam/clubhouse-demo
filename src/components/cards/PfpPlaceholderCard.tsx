@@ -27,7 +27,7 @@ export function PfpPlaceholderCard({ columnIndex, record, rowIndex }: PfpPlaceho
       />
       <Flex flexible alignItems="center" justifyContent="center">
         <Typography<'div'> as="div" size="2xlarge" variants={['blackout-rounded']} volume="quietest">
-          Loading y00t ...
+          Loading y00t
         </Typography>
       </Flex>
     </BaseGridCard>

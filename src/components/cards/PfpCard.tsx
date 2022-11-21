@@ -16,7 +16,9 @@ const Image = styled('img', {
   shouldForwardProp: (prop: string) => prop !== 'visible',
 })<{ visible: boolean }>`
   opacity: ${({ visible }) => (visible ? 1 : 0)};
-  transition: opacity 300ms;
+  transition: opacity 300ms, transform 300ms cubic-bezier(0.27, -0.07, 0.24, 1.56) 0s;
+  transform: scale(${({ visible }) => (visible ? 1 : 0.9)});
+  transform-origin: bottom center;
 `;
 
 export type PfpCardProps = {
@@ -33,6 +35,9 @@ export function PfpCard({ columnIndex, record, rowIndex }: PfpCardProps): JSX.El
   const [imageLoaded, setImageLoaded] = useState<boolean>(false);
   const cancelLoaderRef = useRef<() => void>();
 
+  // [TODO]: downsize the images because the originals are huge (not sure if we can use the dustlabs service)
+  const imgSrc = image; // `https://powered.by.dustlabs.com/cdn-cgi/image/width=306/${image}`;
+
   // on initial load load the PFP image in the background and fade it in
   const loaderImage = (element: HTMLImageElement) => {
     const { promise, cancel } = makeCancelable<HTMLImageElement>(
@@ -40,7 +45,7 @@ export function PfpCard({ columnIndex, record, rowIndex }: PfpCardProps): JSX.El
         if (element) {
           element.onload = () => resolve(element);
           element.onerror = reject;
-          element.src = image;
+          element.src = imgSrc;
         }
       }),
     );
@@ -63,7 +68,7 @@ export function PfpCard({ columnIndex, record, rowIndex }: PfpCardProps): JSX.El
         <Image
           alt={name}
           height={GRID_CARD_WIDTH}
-          src={imageLoaded ? image : PIXEL_IMG}
+          src={imageLoaded ? imgSrc : PIXEL_IMG}
           visible={imageLoaded}
           width={GRID_CARD_WIDTH}
         />

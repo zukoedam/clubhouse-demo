@@ -31,7 +31,7 @@ export function PfpGrid(props: PfpGridProps): JSX.Element {
         </PagePaper>
       )}
 
-      <ListPageGridLoader loading={loading} maxCards={10} placeholder={PfpPlaceholderCard} raised={40} {...props} />
+      <ListPageGridLoader loading={loading} placeholder={PfpPlaceholderCard} raised={40} {...props} />
     </Fragment>
   );
 }

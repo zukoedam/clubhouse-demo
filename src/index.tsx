@@ -8,6 +8,7 @@ import '@phork/phorkit/styles/normalize.css';
 import * as serviceWorker from 'serviceWorkerRegistration';
 import 'styles/global.css';
 import 'styles/variables.css';
+import 'styles/fonts/CourierPrime/main.css';
 
 const App = React.lazy(() => import('components/App').then(({ App }) => ({ default: App })));
 

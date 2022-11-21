@@ -3,6 +3,6 @@ config/
 scripts/
 src/serviceWorkerRegistration.js
 src/service-worker.js
-src/styles/fonts.css
+src/styles/fonts
 build/
 index.tsx
