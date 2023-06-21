@@ -27,6 +27,7 @@ export type VirtualizedGridProps<RecordType extends BaseGridRecordType> = Pick<
   minWidth?: number;
   onItemsRendered?: GridProps['onItemsRendered'];
   onScroll?: GridProps['onScroll'];
+  overscanRowCount?: number;
   records: RecordType[];
   width?: number;
 };
@@ -46,6 +47,7 @@ function VirtualizedGridBase<RecordType extends BaseGridRecordType>(
     my = GRID_MY,
     onItemsRendered,
     onScroll,
+    overscanRowCount,
     placeholder,
     raised,
     records,
@@ -114,6 +116,7 @@ function VirtualizedGridBase<RecordType extends BaseGridRecordType>(
           itemKey={itemKey}
           onItemsRendered={onItemsRendered}
           onScroll={onScroll}
+          overscanRowCount={overscanRowCount}
           ref={forwardedRef}
           rowCount={rowCount}
           rowHeight={rowHeight}
@@ -141,6 +144,7 @@ function VirtualizedGridBase<RecordType extends BaseGridRecordType>(
       my,
       onItemsRendered,
       onScroll,
+      overscanRowCount,
       placeholder,
       raised,
       rowCount,

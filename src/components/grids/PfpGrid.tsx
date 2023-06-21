@@ -18,6 +18,7 @@ export function PfpGrid(props: PfpGridProps): JSX.Element {
       {cards.length > 0 && (
         <VirtualizedGrid<PfpRecord>
           component={PfpCard}
+          overscanRowCount={2}
           placeholder={PfpPlaceholderCard}
           raised={40}
           records={cards}
