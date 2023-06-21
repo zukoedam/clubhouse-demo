@@ -30,5 +30,6 @@ jobs:
         with:
           default_author: github_actions
           message: ':bento: feat: updated member list'
+          commit: --no-verify
           add: 'src/assets/json/*.json'
           push: true
