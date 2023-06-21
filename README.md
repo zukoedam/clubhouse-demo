@@ -53,4 +53,6 @@ A video walkthrough of the steps to take has been provided [here](https://www.yo
 
 ### Membership updates
 
-If you've made updates to your own clubhouse that uses the `mintAddress` from the members list then you'll need to keep your collection up to date until y00ts mints out. A Github workflow called [Membership](./.github/workflows/members.yml) has been provided. This workflow can be run manually to update your membership data, or you can modify it to run automatically using a [schedule](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule). **Please don't run this more than once an hour.**
+Because this application doesn't pull live data directly from the blockchain you'll need to keep your collection up to date until all y00ts are revealed. Unrevealed y00ts show up with the ID "????". A Github workflow called [Membership](./.github/workflows/members.yml) has been provided. This workflow can be run manually to update your membership data, or you can modify it to run automatically using a [schedule](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule). **Please don't run this more than once an hour.**
+
+Note that clubhouses that had their members list generated prior to June 21, 2023 will have the real IDs instead of "????". The y00ts team has since removed these IDs.

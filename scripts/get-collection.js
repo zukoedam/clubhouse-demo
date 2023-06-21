@@ -30,10 +30,11 @@ const query = offset =>
     credentials: 'omit',
   });
 
+// we want IDs of 0 to show last so just reassign them to a high number
 const sortIds = ids => {
   ids.sort((a, b) => {
-    const aInt = a.id || parseInt(a.name.replace(/[^\d]*/g, ''));
-    const bInt = b.id || parseInt(b.name.replace(/[^\d]*/g, ''));
+    const aInt = a.id || 15000;
+    const bInt = b.id || 15000;
 
     if (isNaN(aInt) || isNaN(bInt)) {
       return 0;

@@ -35,8 +35,8 @@ export function PfpCard({ columnIndex, record, rowIndex }: PfpCardProps): JSX.El
   const [imageLoaded, setImageLoaded] = useState<boolean>(false);
   const cancelLoaderRef = useRef<() => void>();
 
-  // [TODO]: downsize the images because the originals are huge (not sure if we can use the dustlabs service)
-  const imgSrc = image; // `https://powered.by.dustlabs.com/cdn-cgi/image/width=306/${image}`;
+  // we can use the dustlabs service if we don't go overboard
+  const imgSrc = `https://powered.by.dustlabs.com/cdn-cgi/image/width=306/${image}`;
 
   // on initial load load the PFP image in the background and fade it in
   const loaderImage = (element: HTMLImageElement) => {
